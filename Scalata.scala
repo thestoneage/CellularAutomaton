@@ -22,16 +22,16 @@ class ElementaryCellularAutomaton(rule:Int, initial:List[Boolean]) {
     }
 
     override def toString() = {
-        initial.foldLeft("")((acc, x:Boolean) => if (x) acc ++ "+" else acc ++ "-")
+        initial.map(if (_) "+" else "-").reduceLeft(_ ++ _)
     }
 
 }
 
 object ElementaryCellularAutomaton {
-    apply(rule:Int, initial:List[Boolean]) = new ElementaryCellularAutomaton(rule, initial)
+    def apply(rule:Int, initial:List[Boolean]) = new ElementaryCellularAutomaton(rule, initial)
 
-    evolve(automaton:ElementaryCellularAutomaton):Stream[ElementaryCellularAutomaton] = {
-        Stream.cons(automaton, evolve(automaton.next)
+    def evolve(automaton:ElementaryCellularAutomaton):Stream[ElementaryCellularAutomaton] = {
+        Stream.cons(automaton, evolve(automaton.next))
     }
 }
 
