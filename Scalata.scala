@@ -27,8 +27,12 @@ class ElementaryCellularAutomaton(rule:Int, initial:List[Boolean]) {
 
 }
 
-def from(automaton:ElementaryCellularAutomaton):Stream[ElementaryCellularAutomaton] = {
-    Stream.cons(automaton, from(automaton.next))
+object ElementaryCellularAutomaton {
+    apply(rule:Int, initial:List[Boolean]) = new ElementaryCellularAutomaton(rule, initial)
+
+    evolve(automaton:ElementaryCellularAutomaton):Stream[ElementaryCellularAutomaton] = {
+        Stream.cons(automaton, evolve(automaton.next)
+    }
 }
 
 
