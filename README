@@ -1,2 +1,18 @@
-Implementation of an Elementary Cellular Automaton written in Scala
+Implementation of an Elementary Cellular Automaton written in Scala.
+All 256 Elementary Automata are supported and can be created using their Wolfram Code.
+
+Example:
+// Create the 184 Automaton with an initial State
+val initialState = List(false, true, false)
+val automaton = ElementaryCellularAutomaton(184, initialStateAsList)
+
+// Create an infinite collection of the automaton's evolution
+val stream = ElementaryCellularAutomaton.evolve(automaton)
+
+// Print the first 4 generations of a the automaton
+stream.take(4).foreach(println _)
+-+-
+--+
++--
+-+-
 

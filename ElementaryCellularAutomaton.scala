@@ -1,6 +1,15 @@
 import scala.collection.immutable.Stream
 
+object ElementaryCellularAutomaton {
+    def apply(rule:Int, initial:List[Boolean]) = new ElementaryCellularAutomaton(rule, initial)
+
+    def evolveFrom(automaton:ElementaryCellularAutomaton):Stream[ElementaryCellularAutomaton] = {
+        Stream.cons(automaton, evolveFrom(automaton.next))
+    }
+}
+
 class ElementaryCellularAutomaton(rule:Int, initial:List[Boolean]) {
+
     assert(rule < 256)
 
     def rule(slice:List[Boolean]):Boolean = {
@@ -16,24 +25,22 @@ class ElementaryCellularAutomaton(rule:Int, initial:List[Boolean]) {
         }
     }
 
-    def next = {
-        val lst = ((initial.last :: initial) :+ initial.head).sliding(3).map(x => rule(x)).toList
+    def next:ElementaryCellularAutomaton = {
+        val lst = ((initial.last :: initial) :+ initial.head).sliding(3).map(rule _).toList
         new ElementaryCellularAutomaton(rule, lst)
+    }
+
+    def evolutionStream:Stream[ElementaryCellularAutomaton] = {
+        Stream.cons(this, evolve(this.next))
     }
 
     override def toString() = {
         initial.map(if (_) "+" else "-").reduceLeft(_ ++ _)
     }
 
-}
-
-object ElementaryCellularAutomaton {
-    def apply(rule:Int, initial:List[Boolean]) = new ElementaryCellularAutomaton(rule, initial)
-
-    def evolve(automaton:ElementaryCellularAutomaton):Stream[ElementaryCellularAutomaton] = {
-        Stream.cons(automaton, evolve(automaton.next))
+    private def evolve(automaton:ElementaryCellularAutomaton):Stream[ElementaryCellularAutomaton] = {
+        Stream.cons(this, evolve(this.next))
     }
 }
-
 
 // vim: set ts=4 sw=4 et:
