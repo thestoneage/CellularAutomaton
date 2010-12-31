@@ -1,5 +1,3 @@
-import scala.collection.immutable.Stream
-
 object ElementaryCellularAutomaton {
   def apply(rule: Short, initial: List[Boolean]) = new ElementaryCellularAutomaton(rule, initial)
 
