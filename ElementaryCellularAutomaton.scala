@@ -26,8 +26,7 @@ class ElementaryCellularAutomaton(rule:Int, initial:List[Boolean]) {
     ElementaryCellularAutomaton(rule, lst)
   }
 
-  def evolutionStream =
-    this #:: evolve(next)
+  def evolutionStream = this #:: evolve(next)
 
   override def toString() = initial.map(if (_) "+" else "-").mkString
 
