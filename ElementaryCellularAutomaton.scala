@@ -1,13 +1,13 @@
 import scala.collection.immutable.Stream
 
 object ElementaryCellularAutomaton {
-  def apply(rule:Int, initial:List[Boolean]) = new ElementaryCellularAutomaton(rule, initial)
+  def apply(rule:Short, initial:List[Boolean]) = new ElementaryCellularAutomaton(rule, initial)
 
   def evolveFrom(automaton:ElementaryCellularAutomaton):Stream[ElementaryCellularAutomaton] =
     automaton #:: evolveFrom(automaton.next)
 }
 
-class ElementaryCellularAutomaton(rule:Int, initial:List[Boolean]) {
+class ElementaryCellularAutomaton(rule:Short, initial:List[Boolean]) {
   assert(rule < 256)
 
   def rule(slice:List[Boolean]):Boolean = slice match {
