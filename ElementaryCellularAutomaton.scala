@@ -35,7 +35,7 @@ class ElementaryCellularAutomaton(rule:Int, initial:List[Boolean]) {
     }
 
     override def toString() = {
-        initial.map(if (_) "+" else "-").reduceLeft(_ ++ _)
+        initial.map(if (_) "+" else "-").mkString
     }
 
     private def evolve(automaton:ElementaryCellularAutomaton):Stream[ElementaryCellularAutomaton] = {
