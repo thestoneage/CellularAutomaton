@@ -21,12 +21,12 @@ class ElementaryCellularAutomaton(rule:Int, initial:List[Boolean]) {
         case List(true,  true,  true ) => (rule & 0x80) == 0x80
     }
 
-    def next:ElementaryCellularAutomaton = {
+    def next = {
         val lst = ((initial.last :: initial) :+ initial.head).sliding(3).map(rule _).toList
         new ElementaryCellularAutomaton(rule, lst)
     }
 
-    def evolutionStream:Stream[ElementaryCellularAutomaton] =
+    def evolutionStream =
         this #:: evolve(next)
 
     override def toString() = initial.map(if (_) "+" else "-").mkString
