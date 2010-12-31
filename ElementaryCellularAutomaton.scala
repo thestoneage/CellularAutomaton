@@ -4,7 +4,7 @@ object ElementaryCellularAutomaton {
     def apply(rule:Int, initial:List[Boolean]) = new ElementaryCellularAutomaton(rule, initial)
 
     def evolveFrom(automaton:ElementaryCellularAutomaton):Stream[ElementaryCellularAutomaton] = {
-        Stream.cons(automaton, evolveFrom(automaton.next))
+        automaton #:: evolveFrom(automaton.next)
     }
 }
 
@@ -31,7 +31,7 @@ class ElementaryCellularAutomaton(rule:Int, initial:List[Boolean]) {
     }
 
     def evolutionStream:Stream[ElementaryCellularAutomaton] = {
-        Stream.cons(this, evolve(this.next))
+        this #:: evolve(this.next)
     }
 
     override def toString() = {
@@ -39,7 +39,7 @@ class ElementaryCellularAutomaton(rule:Int, initial:List[Boolean]) {
     }
 
     private def evolve(automaton:ElementaryCellularAutomaton):Stream[ElementaryCellularAutomaton] = {
-        Stream.cons(this, evolve(this.next))
+        this #:: evolve(this.next)
     }
 }
 
