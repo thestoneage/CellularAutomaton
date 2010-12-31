@@ -23,7 +23,7 @@ class ElementaryCellularAutomaton(rule:Int, initial:List[Boolean]) {
 
     def next = {
         val lst = ((initial.last :: initial) :+ initial.head).sliding(3).map(rule _).toList
-        new ElementaryCellularAutomaton(rule, lst)
+        ElementaryCellularAutomaton(rule, lst)
     }
 
     def evolutionStream =
