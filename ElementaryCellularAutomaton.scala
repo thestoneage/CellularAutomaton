@@ -27,12 +27,12 @@ class ElementaryCellularAutomaton(rule:Int, initial:List[Boolean]) {
     }
 
     def evolutionStream:Stream[ElementaryCellularAutomaton] =
-        this #:: evolve(this.next)
+        this #:: evolve(next)
 
     override def toString() = initial.map(if (_) "+" else "-").mkString
 
     private def evolve(automaton:ElementaryCellularAutomaton):Stream[ElementaryCellularAutomaton] =
-        this #:: evolve(this.next)
+        this #:: evolve(next)
 }
 
 // vim: set ts=4 sw=4 et:
