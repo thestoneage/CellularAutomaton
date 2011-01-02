@@ -16,3 +16,11 @@ stream.take(4).foreach(println _)
 +--
 -+-
 
+There is also a simple commandline driver named 'demo'. For the 
+equivalent of the above example, try:
+
+    # scala demo 184 010 4
+
+That is:
+
+    # scala demo <Wolfram Code> <initial state> <#iterations>
